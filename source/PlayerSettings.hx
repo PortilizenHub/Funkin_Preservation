@@ -39,9 +39,9 @@ class PlayerSettings
 		this.controls = new Controls('player$id', scheme);
 	}
 
-	public function setKeyboardScheme(scheme)
+	public function setKeyboardScheme(scheme, keybinds:String)
 	{
-		controls.setKeyboardScheme(scheme);
+		controls.setKeyboardScheme(scheme, '$keybinds', true);
 	}
 
 	/* 
