@@ -1,6 +1,9 @@
 package;
 
-class Options
+class Options {}
+
+class Gameplay 
 {
-	public static var masterVolume:Float = 1;
+	public static var midSongEvents:Bool = true;
+	public static var keybinds:Bool = true;
 }

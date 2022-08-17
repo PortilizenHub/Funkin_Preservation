@@ -8,7 +8,7 @@ import flixel.util.FlxColor;
 
 class OptionsSubState extends MusicBeatSubstate
 {
-	var textMenuItems:Array<String> = ['Master Volume', 'Sound Volume', 'Controls'];
+	var textMenuItems:Array<String> = ['Gameplay', 'Newgrounds'];
 
 	var selector:FlxSprite;
 	var curSelected:Int = 0;
@@ -23,11 +23,11 @@ class OptionsSubState extends MusicBeatSubstate
 		add(grpOptionsTexts);
 
 		selector = new FlxSprite().makeGraphic(5, 5, FlxColor.RED);
-		add(selector);
+		// add(selector);
 
 		for (i in 0...textMenuItems.length)
 		{
-			var optionText:FlxText = new FlxText(600, 20 + (i * 50), 0, textMenuItems[i], 32);
+			var optionText:FlxText = new FlxText(20, 20 + (i * 50), 0, textMenuItems[i], 32);
 			optionText.alignment = CENTER;
 			optionText.ID = i;
 			grpOptionsTexts.add(optionText);
@@ -62,9 +62,9 @@ class OptionsSubState extends MusicBeatSubstate
 		{
 			switch (textMenuItems[curSelected])
 			{
-				case "Controls":
+				case "Gameplay":
 					FlxG.state.closeSubState();
-					FlxG.state.openSubState(new ControlsSubState());
+					FlxG.state.openSubState(new option_menus.GameplaySubState());
 			}
 		}
 	}
