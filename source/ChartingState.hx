@@ -257,6 +257,7 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(stepperSpeed);
 		tab_group_song.add(player1DropDown);
 		tab_group_song.add(player2DropDown);
+		tab_group_song.add(restartChert);
 
 		UI_box.addGroup(tab_group_song);
 		UI_box.scrollFactor.set();
