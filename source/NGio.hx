@@ -1,8 +1,10 @@
 package;
 
+import flixel.FlxState;
 import flixel.FlxG;
 import flixel.util.FlxSignal;
 import flixel.util.FlxTimer;
+import flixel.text.FlxText;
 import io.newgrounds.NG;
 import io.newgrounds.components.ScoreBoardComponent.Period;
 import io.newgrounds.objects.Medal;
@@ -187,13 +189,20 @@ class NGio
 		trace('should have logged: ' + event);
 	}
 
-	inline static public function unlockMedal(id:Int)
+	inline static public function unlockMedal(id:Int, ?name:String)
 	{
 		if (isLoggedIn)
 		{
 			var medal = NG.core.medals.get(id);
 			if (!medal.unlocked)
-				medal.sendUnlock();
+				{
+					medal.sendUnlock();
+					if (name != null)
+						{
+							trace('the $name medal has been unlocked');
+						}
+					FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+				}
 		}
 	}
 }
