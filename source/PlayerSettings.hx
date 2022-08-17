@@ -1,5 +1,6 @@
 package;
 
+import Options;
 import Controls;
 import flixel.FlxCamera;
 import flixel.FlxG;
@@ -41,7 +42,10 @@ class PlayerSettings
 
 	public function setKeyboardScheme(scheme, keybinds:String)
 	{
-		controls.setKeyboardScheme(scheme, '$keybinds', true);
+		if (Gameplay.keybinds == true)
+				controls.setKeyboardScheme(scheme, 'dfjk', true);
+		else if (Gameplay.keybinds == false)
+				controls.setKeyboardScheme(scheme, 'wasd', true);
 	}
 
 	/* 

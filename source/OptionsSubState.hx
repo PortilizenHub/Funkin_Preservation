@@ -44,6 +44,13 @@ class OptionsSubState extends MusicBeatSubstate
 		if (controls.DOWN_P)
 			curSelected += 1;
 
+		if (controls.BACK)
+			{
+				FlxG.state.closeSubState();
+				FlxG.switchState(new MainMenuState());
+			}
+
+
 		if (curSelected < 0)
 			curSelected = textMenuItems.length - 1;
 

@@ -490,34 +490,35 @@ class Controls extends FlxActionSet
 	public function setKeyboardScheme(scheme:KeyboardScheme, keybinds:String, reset = true)
 	{
 		if (reset)
-			removeKeyboard();
+			{
+				inline bindKeys(Control.LEFT, [ONE, FlxKey.ONE]);
+				inline bindKeys(Control.DOWN, [ONE, FlxKey.ONE]);
+				inline bindKeys(Control.UP, [ONE, FlxKey.ONE]);
+				inline bindKeys(Control.RIGHT, [ONE, FlxKey.ONE]);
+			}
 
 		keyboardScheme = scheme;
 		
 		switch (keybinds)
 		{
 			case 'wasd':
-				inline bindKeys(Control.UP, [W, FlxKey.UP]);
-				inline bindKeys(Control.DOWN, [S, FlxKey.DOWN]);
 				inline bindKeys(Control.LEFT, [A, FlxKey.LEFT]);
+				inline bindKeys(Control.DOWN, [S, FlxKey.DOWN]);
+				inline bindKeys(Control.UP, [W, FlxKey.UP]);
 				inline bindKeys(Control.RIGHT, [D, FlxKey.RIGHT]);
-				inline bindKeys(Control.ACCEPT, [Z, SPACE, ENTER]);
-				inline bindKeys(Control.BACK, [BACKSPACE, ESCAPE]);
-				inline bindKeys(Control.PAUSE, [P, ENTER, ESCAPE]);
-				inline bindKeys(Control.RESET, [R]);
-				inline bindKeys(Control.CHEAT, [L]);
 			case 'dfjk':
-				inline bindKeys(Control.UP, [J, FlxKey.UP]);
-				inline bindKeys(Control.DOWN, [F, FlxKey.DOWN]);
 				inline bindKeys(Control.LEFT, [D, FlxKey.LEFT]);
+				inline bindKeys(Control.DOWN, [F, FlxKey.DOWN]);
+				inline bindKeys(Control.UP, [J, FlxKey.UP]);
 				inline bindKeys(Control.RIGHT, [K, FlxKey.RIGHT]);
-				inline bindKeys(Control.ACCEPT, [Z, SPACE, ENTER]);
-				inline bindKeys(Control.BACK, [BACKSPACE, ESCAPE]);
-				inline bindKeys(Control.PAUSE, [P, ENTER, ESCAPE]);
-				inline bindKeys(Control.RESET, [R]);
-				inline bindKeys(Control.CHEAT, [L]);
 				
 		}
+
+		inline bindKeys(Control.ACCEPT, [Z, SPACE, ENTER]);
+		inline bindKeys(Control.BACK, [BACKSPACE, ESCAPE]);
+		inline bindKeys(Control.PAUSE, [P, ENTER, ESCAPE]);
+		inline bindKeys(Control.RESET, [R]);
+		inline bindKeys(Control.CHEAT, [L]);
 	}
 
 	function removeKeyboard()
