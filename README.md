@@ -19,6 +19,7 @@ IF YOU MAKE A MOD AND DISTRIBUTE A MODIFIED / RECOMPILED VERSION, YOU MUST OPEN 
 ## FNF Preservation Credits / shoutouts
 
 - [portilizen](https://www.youtube.com/channel/UCTGdCANfqYPwPeTY4gRZoOg) - Programmer
+- [tsua](https://www.youtube.com/channel/UCclYiESiD4OO0zdyD4MaPHg) - Musician
 
 This mod was made with love to Newgrounds and its community.
 
