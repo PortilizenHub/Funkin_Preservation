@@ -35,6 +35,8 @@ class NGio
 	public static var GAME_VER_NUMS:String = '';
 	public static var gotOnlineVer:Bool = false;
 
+	public static var medalUnlocked:Bool;
+
 	public static function noLogin(api:String)
 	{
 		trace('INIT NOLOGIN');
@@ -194,8 +196,10 @@ class NGio
 		if (isLoggedIn)
 		{
 			var medal = NG.core.medals.get(id);
+			medalUnlocked = false;
 			if (!medal.unlocked)
 				{
+					medalUnlocked = true;
 					medal.sendUnlock();
 				}
 		}

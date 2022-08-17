@@ -281,7 +281,8 @@ class TitleState extends MusicBeatState
 			if (Date.now().getDay() == 5)
 				{
 					NGio.unlockMedal(70338);
-					FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+					if (NGio.medalUnlocked)
+						FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 				}
 			#end
 

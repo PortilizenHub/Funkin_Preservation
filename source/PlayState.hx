@@ -2475,7 +2475,8 @@ class PlayState extends MusicBeatState
 				{
 					trace('FC');
 					NGio.unlockMedal(70339);
-					FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+					if (NGio.medalUnlocked)
+						FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 				}
 			#end
 		}

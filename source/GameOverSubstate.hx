@@ -16,8 +16,8 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	public function new(x:Float, y:Float)
 	{
-		NGio.unlockMedal(70340);
-		FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+		if (NGio.medalUnlocked)
+			FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 
 		var daStage = PlayState.curStage;
 		var daBf:String = '';
