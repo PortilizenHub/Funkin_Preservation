@@ -204,9 +204,14 @@ class ChartingState extends MusicBeatState
 		});
 
 		var reloadSong:FlxButton = new FlxButton(saveButton.x + saveButton.width + 10, saveButton.y, "Reload Audio", function()
-		{
-			loadSong(_song.song);
-		});
+			{
+				loadSong(_song.song);
+			});
+
+		var restartChert:FlxButton = new FlxButton(saveButton.x, saveButton.y + 30, "Restart Chart", function()
+			{
+				clearSong();
+			});
 
 		var reloadSongJson:FlxButton = new FlxButton(reloadSong.x, saveButton.y + 30, "Reload JSON", function()
 		{
