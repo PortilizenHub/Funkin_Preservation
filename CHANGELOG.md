@@ -1,8 +1,24 @@
 # Changelog
 All notable changes will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+
+This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.2.0] - 2022-17-08
+### Added
+- Miss counter
+- Secret in main menu (press R)
+- Restart chart button in chart editor
+- Cheating keybind (use it and you suck)
+- More Medals
+
+### Changed
+- Health gain
+
+### Removed
+- [Monster](https://tenor.com/view/superbad-mc-lovin-cry-fogell-why-dont-you-cry-about-it-gif-15695318)
+- Hold notes having less health gain
 
 ## [0.1.0] - 2022-17-08
 ### Added
