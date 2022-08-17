@@ -37,6 +37,17 @@ class MainMenuState extends MusicBeatState
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 
+		if (Date.now().getMonth() == 4 && Date.now().getDay() == 1)
+		{
+			trace('you know the rules and so do i');
+
+			#if linux
+			Sys.command('/usr/bin/xdg-open', ["https://www.youtube.com/watch?v=dQw4w9WgXcQ", "&"]);
+			#else
+			FlxG.openURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+			#end
+		}
+
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
 
@@ -115,6 +126,17 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
+			if (FlxG.keys.justPressed.R)
+			{
+				trace('you know the rules and so do i');
+
+				#if linux
+				Sys.command('/usr/bin/xdg-open', ["https://www.youtube.com/watch?v=dQw4w9WgXcQ", "&"]);
+				#else
+				FlxG.openURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+				#end
+			}
+			
 			if (controls.UP_P)
 			{
 				FlxG.sound.play(Paths.sound('scrollMenu'));
