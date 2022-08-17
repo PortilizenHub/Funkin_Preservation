@@ -27,7 +27,8 @@ class OptionsSubState extends MusicBeatSubstate
 
 		for (i in 0...textMenuItems.length)
 		{
-			var optionText:FlxText = new FlxText(20, 20 + (i * 50), 0, textMenuItems[i], 32);
+			var optionText:FlxText = new FlxText(600, 20 + (i * 50), 0, textMenuItems[i], 32);
+			optionText.alignment = CENTER;
 			optionText.ID = i;
 			grpOptionsTexts.add(optionText);
 		}
