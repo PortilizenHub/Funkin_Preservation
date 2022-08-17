@@ -3,7 +3,9 @@
 This is the repository for Friday Night Funkin Preservation, a mod for a game that was originally made for Ludum Dare 47 "Stuck In a Loop".
 
 Play the FNF Ludum Dare prototype here: https://ninja-muffin24.itch.io/friday-night-funkin
+
 Play FNF on newgrounds here: https://www.newgrounds.com/portal/view/770371
+
 Support the FNF project on the itch.io page: https://ninja-muffin24.itch.io/funkin
 
 IF YOU MAKE A MOD AND DISTRIBUTE A MODIFIED / RECOMPILED VERSION, YOU MUST OPEN SOURCE YOUR MOD AS WELL
