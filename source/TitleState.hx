@@ -279,7 +279,10 @@ class TitleState extends MusicBeatState
 			#if !switch
 			// If it's Friday according to da clock
 			if (Date.now().getDay() == 5)
-				NGio.unlockMedal(70338, 'Friday Night yeah');
+				{
+					NGio.unlockMedal(70338);
+					FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+				}
 			#end
 
 			titleText.animation.play('press');

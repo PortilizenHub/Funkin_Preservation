@@ -23,8 +23,6 @@ class GameOverState extends FlxTransitionableState
 
 	override function create()
 	{
-		NGio.unlockMedal(70340, 'Die');
-
 		/* var loser:FlxSprite = new FlxSprite(100, 100);
 			var loseTex = FlxAtlasFrames.fromSparrow(AssetPaths.lose.png, AssetPaths.lose.xml);
 			loser.frames = loseTex;

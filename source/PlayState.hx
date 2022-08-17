@@ -2474,7 +2474,8 @@ class PlayState extends MusicBeatState
 			if (songMiss == 0)
 				{
 					trace('FC');
-					NGio.unlockMedal(70339, 'Get an FC');
+					NGio.unlockMedal(70339);
+					FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 				}
 			#end
 		}

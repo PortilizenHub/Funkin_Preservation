@@ -189,7 +189,7 @@ class NGio
 		trace('should have logged: ' + event);
 	}
 
-	inline static public function unlockMedal(id:Int, ?name:String)
+	inline static public function unlockMedal(id:Int)
 	{
 		if (isLoggedIn)
 		{
@@ -197,11 +197,6 @@ class NGio
 			if (!medal.unlocked)
 				{
 					medal.sendUnlock();
-					if (name != null)
-						{
-							trace('the $name medal has been unlocked');
-						}
-					FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 				}
 		}
 	}
