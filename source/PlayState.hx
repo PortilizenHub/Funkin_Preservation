@@ -1704,6 +1704,7 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
+		checkFC();
 		canPause = false;
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
@@ -1713,6 +1714,8 @@ class PlayState extends MusicBeatState
 			Highscore.saveScore(SONG.song, songScore, storyDifficulty);
 			#end
 		}
+
+		
 
 		if (isStoryMode)
 		{
@@ -2463,6 +2466,18 @@ class PlayState extends MusicBeatState
 			lightningStrikeShit();
 		}
 	}
+
+	function checkFC()
+		{
+			#if !switch
+			trace('check if an FC');
+			if (songMiss == 0)
+				{
+					trace('FC');
+					NGio.unlockMedal(70339);
+				}
+			#end
+		}
 
 	var curLight:Int = 0;
 }

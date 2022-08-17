@@ -46,6 +46,12 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
+		#if html5
+		#if debug
+		FlxG.log.redirectTraces = true;
+		#end
+		#end
+
 		#if polymod
 		polymod.Polymod.init({modRoot: "mods", dirs: ['introMod']});
 		#end
