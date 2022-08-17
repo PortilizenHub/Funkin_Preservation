@@ -1568,7 +1568,7 @@ class PlayState extends MusicBeatState
 			trace("RESET = True");
 		}
 
-		// CHEAT = brandon's a pussy
+		// CHEAT = users a pussy
 		if (controls.CHEAT)
 		{
 			health += 1;
