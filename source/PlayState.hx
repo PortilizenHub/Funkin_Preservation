@@ -41,6 +41,7 @@ import lime.utils.Assets;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
+import lime.app.Application;
 
 using StringTools;
 
@@ -54,6 +55,8 @@ class PlayState extends MusicBeatState
 	public static var storyDifficulty:Int = 1;
 
 	var halloweenLevel:Bool = false;
+
+	private var version:FlxText;
 
 	private var vocals:FlxSound;
 
@@ -137,6 +140,9 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+		version = new FlxText(1080, 700, 'v' + Application.current.meta.get('version'), 12);
+		add(version);
+
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 

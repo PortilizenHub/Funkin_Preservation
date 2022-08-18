@@ -29,7 +29,7 @@ class GameplaySubState extends MusicBeatSubstate
 
 		for (i in 0...textMenuItems.length)
 		{
-			var optionText:FlxText = new FlxText(20, 20 + (i * 80), 0, '', 32);
+			var optionText:FlxText = new FlxText(20, 20 + (i * 60), 0, '', 32);
 			optionText.font = Paths.font('funker.otf');
 			optionText.ID = i;
 			grpOptionsTexts.add(optionText);

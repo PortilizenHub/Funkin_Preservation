@@ -1,14 +1,16 @@
-package;
+package option_menus;
 
+import Options.Gameplay;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 
-class OptionsSubState extends MusicBeatSubstate
+class TemplateSubState extends MusicBeatSubstate
 {
-	var textMenuItems:Array<String> = ['Gameplay', 'Streaming'];
+	var textMenuItems:Array<String> = [];
+	var textItemsBool:Array<Bool> = [];
 
 	var selector:FlxSprite;
 	var curSelected:Int = 0;
@@ -27,10 +29,9 @@ class OptionsSubState extends MusicBeatSubstate
 
 		for (i in 0...textMenuItems.length)
 		{
-			var optionText:FlxText = new FlxText(20, 20 + (i * 80), 0, textMenuItems[i], 32);
+			var optionText:FlxText = new FlxText(20, 20 + (i * 60), 0, '', 32);
 			optionText.font = Paths.font('funker.otf');
 			optionText.ID = i;
-			optionText.size = 64;
 			grpOptionsTexts.add(optionText);
 		}
 	}
@@ -39,18 +40,19 @@ class OptionsSubState extends MusicBeatSubstate
 	{
 		super.update(elapsed);
 
+        textItemsBool = [];
+
 		if (controls.UP_P)
 			curSelected -= 1;
 
 		if (controls.DOWN_P)
 			curSelected += 1;
 
-		if (controls.BACK)
+        if (controls.BACK)
 			{
 				FlxG.state.closeSubState();
 				FlxG.switchState(new MainMenuState());
 			}
-
 
 		if (curSelected < 0)
 			curSelected = textMenuItems.length - 1;
@@ -60,7 +62,9 @@ class OptionsSubState extends MusicBeatSubstate
 
 		grpOptionsTexts.forEach(function(txt:FlxText)
 		{
-			txt.color = FlxColor.WHITE;
+            txt.text = textMenuItems[txt.ID] + ": " + textItemsBool[txt.ID];
+
+            txt.color = FlxColor.WHITE;
 
 			if (txt.ID == curSelected)
 				txt.color = FlxColor.YELLOW;
@@ -69,18 +73,7 @@ class OptionsSubState extends MusicBeatSubstate
 		if (controls.ACCEPT)
 		{
 			switch (textMenuItems[curSelected])
-			{
-				case "Gameplay":
-					FlxG.state.closeSubState();
-					FlxG.state.openSubState(new option_menus.GameplaySubState());
-
-				case "Streaming":
-					FlxG.state.closeSubState();
-					FlxG.state.openSubState(new option_menus.StreamerSubState());
-
-				default:
-					FlxG.state.closeSubState();
-					FlxG.state.openSubState(new option_menus.TemplateSubState());
+			{           
 			}
 		}
 	}
