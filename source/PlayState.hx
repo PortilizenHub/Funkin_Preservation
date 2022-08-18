@@ -641,8 +641,8 @@ class PlayState extends MusicBeatState
 		switch (curStage)
 		{
 			case 'limo':
-				boyfriend.y -= 220;
-				boyfriend.x += 300;
+				boyfriend.y -= 240;
+				boyfriend.x += 350;
 
 				resetFastCar();
 				add(fastCar);
