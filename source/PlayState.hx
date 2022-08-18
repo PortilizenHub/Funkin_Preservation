@@ -1784,6 +1784,8 @@ class PlayState extends MusicBeatState
 				trace("RESET = True");
 			}
 
+			// rip the cheaters
+			// they still suck shit tho
 			// CHEAT = brandon's a pussy
 			// if (controls.CHEAT)
 			// {
