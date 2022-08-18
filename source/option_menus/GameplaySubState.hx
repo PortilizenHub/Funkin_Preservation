@@ -9,8 +9,8 @@ import flixel.util.FlxColor;
 
 class GameplaySubState extends MusicBeatSubstate
 {
-	var textMenuItems:Array<String> = ['Mid Song Events', 'Cutscenes', 'Downscroll'];
-	var textItemsBool:Array<Bool> = [Gameplay.midSongEvents, Gameplay.cutscenes, Gameplay.downscroll];
+	var textMenuItems:Array<String> = ['Mid Song Events', 'Cutscenes'];
+	var textItemsBool:Array<Bool> = [Gameplay.midSongEvents, Gameplay.cutscenes];
 
 	var selector:FlxSprite;
 	var curSelected:Int = 0;
@@ -40,7 +40,7 @@ class GameplaySubState extends MusicBeatSubstate
 	{
 		super.update(elapsed);
 
-		textItemsBool = [Gameplay.midSongEvents, Gameplay.cutscenes, Gameplay.downscroll];
+		textItemsBool = [Gameplay.midSongEvents, Gameplay.cutscenes];
 
 		if (controls.UP_P)
 			curSelected -= 1;
@@ -86,6 +86,8 @@ class GameplaySubState extends MusicBeatSubstate
 					else if (Gameplay.cutscenes == false)
 						Gameplay.cutscenes = true;
 
+				
+					/*
 				case "Downscroll":
 					if (Gameplay.downscroll == true)
 						Gameplay.downscroll = false;
@@ -104,6 +106,8 @@ class GameplaySubState extends MusicBeatSubstate
 						Gameplay.keybinds = true;
 					}
 					trace('keybinds');
+				
+				*/
 
 				default:
 					FlxG.log.error('item is null and does not have a value');
