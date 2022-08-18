@@ -9,8 +9,8 @@ import flixel.util.FlxColor;
 
 class GameplaySubState extends MusicBeatSubstate
 {
-	var textMenuItems:Array<String> = ['Mid Song Events'];
-	var textItemsBool:Array<Bool> = [Gameplay.midSongEvents];
+	var textMenuItems:Array<String> = ['Mid Song Events', 'Cutscenes'];
+	var textItemsBool:Array<Bool> = [Gameplay.midSongEvents, Gameplay.cutscenes];
 
 	var selector:FlxSprite;
 	var curSelected:Int = 0;
@@ -29,9 +29,10 @@ class GameplaySubState extends MusicBeatSubstate
 
 		for (i in 0...textMenuItems.length)
 		{
-			var optionText:FlxText = new FlxText(20, 20 + (i * 50), 0, textMenuItems[i] + ": " + textItemsBool[i], 32);
+			var optionText:FlxText = new FlxText(20, 20 + (i * 80), 0, textMenuItems[i], 32);
 			optionText.font = Paths.font('funker.otf');
 			optionText.ID = i;
+			optionText.size = 64;
 			grpOptionsTexts.add(optionText);
 		}
 	}
@@ -40,7 +41,7 @@ class GameplaySubState extends MusicBeatSubstate
 	{
 		super.update(elapsed);
 
-        textItemsBool = [Gameplay.midSongEvents, Gameplay.keybinds];
+        textItemsBool = [Gameplay.midSongEvents, Gameplay.cutscenes];
 
 		if (controls.UP_P)
 			curSelected -= 1;
@@ -63,10 +64,12 @@ class GameplaySubState extends MusicBeatSubstate
 		grpOptionsTexts.forEach(function(txt:FlxText)
 		{
             txt.text = textMenuItems[txt.ID] + ": " + textItemsBool[txt.ID];
+            /*
             if (textMenuItems[txt.ID] == 'keybinds' && textItemsBool[txt.ID] == true)
                 txt.text = "keybinds: WASD";
             else if (textMenuItems[txt.ID] == 'keybinds' && textItemsBool[txt.ID] == false)
                 txt.text = "keybinds: DFJK";
+            */
 
             txt.color = FlxColor.WHITE;
 
@@ -79,7 +82,17 @@ class GameplaySubState extends MusicBeatSubstate
 			switch (textMenuItems[curSelected])
 			{
 				case "Mid Song Events":
-                
+                    if (Gameplay.midSongEvents == true)
+                        Gameplay.midSongEvents = false;
+                    else if (Gameplay.midSongEvents == false)
+                        Gameplay.midSongEvents = true;
+
+                case "Cutscenes":
+                    if (Gameplay.cutscenes == true)
+                        Gameplay.cutscenes = false;
+                    else if (Gameplay.cutscenes == false)
+                        Gameplay.cutscenes = true;
+
                 case "keybinds":
                     if (Gameplay.keybinds == true)
                         {

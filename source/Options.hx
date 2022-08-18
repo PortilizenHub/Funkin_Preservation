@@ -5,5 +5,6 @@ class Options {}
 class Gameplay 
 {
 	public static var midSongEvents:Bool = true;
-	public static var keybinds:Bool = true;
+	public static var cutscenes:Bool = true;
+	public static var keybinds:Bool = false;
 }

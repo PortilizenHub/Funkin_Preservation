@@ -159,32 +159,35 @@ class PlayState extends MusicBeatState
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);
 
-		switch (SONG.song.toLowerCase())
-		{
-			case 'tutorial':
-				dialogue = ["Hey you're pretty cute.", 'Use the arrow keys to keep up \nwith me singing.'];
-			case 'bopeebo':
-				dialogue = [
-					'HEY!',
-					"You think you can just sing\nwith my daughter like that?",
-					"If you want to date her...",
-					"You're going to have to go \nthrough ME first!"
-				];
-			case 'fresh':
-				dialogue = ["Not too shabby boy.", ""];
-			case 'dadbattle':
-				dialogue = [
-					"gah you think you're hot stuff?",
-					"If you can beat me here...",
-					"Only then I will even CONSIDER letting you\ndate my daughter!"
-				];
-			case 'senpai':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('senpai/senpaiDialogue'));
-			case 'roses':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('roses/rosesDialogue'));
-			case 'thorns':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('thorns/thornsDialogue'));
-		}
+		if (Options.Gameplay.cutscenes == true)
+			{switch (SONG.song.toLowerCase())
+				{
+					case 'tutorial':
+						dialogue = ["Hey you're pretty cute.", 'Use the arrow keys to keep up \nwith me singing.'];
+					case 'bopeebo':
+						dialogue = [
+							'HEY!',
+							"You think you can just sing\nwith my daughter like that?",
+							"If you want to date her...",
+							"You're going to have to go \nthrough ME first!"
+						];
+					case 'fresh':
+						dialogue = ["Not too shabby boy.", ""];
+					case 'dadbattle':
+						dialogue = [
+							"gah you think you're hot stuff?",
+							"If you can beat me here...",
+							"Only then I will even CONSIDER letting you\ndate my daughter!"
+						];
+					case 'senpai':
+						dialogue = CoolUtil.coolTextFile(Paths.txt('senpai/senpaiDialogue'));
+					case 'roses':
+						dialogue = CoolUtil.coolTextFile(Paths.txt('roses/rosesDialogue'));
+					case 'thorns':
+						dialogue = CoolUtil.coolTextFile(Paths.txt('thorns/thornsDialogue'));
+				}
+				trace(dialogue);
+			}
 
 		#if desktop
 		// Making difficulty text for Discord Rich Presence.
@@ -759,11 +762,10 @@ class PlayState extends MusicBeatState
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
 		// UI_camera.zoom = 1;
-
 		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
 
-		if (isStoryMode)
+		if (isStoryMode && Options.Gameplay.cutscenes)
 		{
 			switch (curSong.toLowerCase())
 			{
@@ -2380,13 +2382,13 @@ class PlayState extends MusicBeatState
 		wiggleShit.update(Conductor.crochet);
 
 		// HARDCODING FOR MILF ZOOMS!
-		if (curSong.toLowerCase() == 'milf' && curBeat >= 168 && curBeat < 200 && camZooming && FlxG.camera.zoom < 1.35)
+		if (curSong.toLowerCase() == 'milf' && curBeat >= 168 && curBeat < 200 && camZooming && FlxG.camera.zoom < 1.35 && Options.Gameplay.midSongEvents == true)
 		{
 			FlxG.camera.zoom += 0.015;
 			camHUD.zoom += 0.03;
 		}
 
-		if (camZooming && FlxG.camera.zoom < 1.35 && curBeat % 4 == 0)
+		if (camZooming && FlxG.camera.zoom < 1.35 && curBeat % 4 == 0 && Options.Gameplay.midSongEvents == true)
 		{
 			FlxG.camera.zoom += 0.015;
 			camHUD.zoom += 0.03;
@@ -2408,12 +2410,12 @@ class PlayState extends MusicBeatState
 			boyfriend.playAnim('idle');
 		}
 
-		if (curBeat % 8 == 7 && curSong == 'Bopeebo')
+		if (curBeat % 8 == 7 && curSong == 'Bopeebo' && Options.Gameplay.midSongEvents == true)
 		{
 			boyfriend.playAnim('hey', true);
 		}
 
-		if (curBeat % 16 == 15 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf' && curBeat > 16 && curBeat < 48)
+		if (curBeat % 16 == 15 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf' && curBeat > 16 && curBeat < 48 && Options.Gameplay.midSongEvents == true)
 		{
 			boyfriend.playAnim('hey', true);
 			dad.playAnim('cheer', true);
