@@ -80,15 +80,6 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
-		if (Options.Streaming.a_rated == false)
-			{
-				weekData.remove(['Satin-Panties', "High", "Milf"]);
-				weekData.remove(['Cocoa', 'Eggnog', 'Winter-Horrorland']);
-				weekData.remove(['Senpai', 'Roses', 'Thorns']);
-				weekData.push(['Fly-My', "High", "Mother"]);
-				weekData.push(['Cocoa', 'Eggnog', 'Winter-Horrorland']);
-				weekData.push(['Senpai', 'Roses', 'Thorns']);
-			}
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
 
