@@ -1674,8 +1674,11 @@ class PlayState extends MusicBeatState
 					daNote.active = true;
 				}
 
-				daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
-
+				if (Options.Gameplay.downscroll)
+					daNote.y = (strumLine.y + (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
+				else if (!Options.Gameplay.downscroll)
+					daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
+		
 				// i am so fucking sorry for this if condition
 				if (daNote.isSustainNote
 					&& daNote.y + daNote.offset.y <= strumLine.y + Note.swagWidth / 2
