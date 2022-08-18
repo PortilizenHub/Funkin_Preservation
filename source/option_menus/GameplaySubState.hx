@@ -9,8 +9,8 @@ import flixel.util.FlxColor;
 
 class GameplaySubState extends MusicBeatSubstate
 {
-	var textMenuItems:Array<String> = ['Mid Song Events', 'keybinds'];
-	var textItemsBool:Array<Bool> = [Gameplay.midSongEvents, Gameplay.keybinds];
+	var textMenuItems:Array<String> = ['Mid Song Events'];
+	var textItemsBool:Array<Bool> = [Gameplay.midSongEvents];
 
 	var selector:FlxSprite;
 	var curSelected:Int = 0;
