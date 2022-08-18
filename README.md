@@ -1,49 +1,32 @@
-# Friday Night Funkin v0.2.8 (Newgrounds Exclusive)
+# Friday Night Funkin Preservation
 
-This is the repository for Friday Night Funkin' v0.2.8, a game in which lies on a singular web page on the internet with no open-source code.
+This is the repository for Friday Night Funkin Preservation, a mod for a game that was originally made for Ludum Dare 47 "Stuck In a Loop".
 
-This project is the result of reverse engineering the transpiled JavaScript code into readable Haxe code, which can now be built upon with ease.
+Play the FNF Ludum Dare prototype here: https://ninja-muffin24.itch.io/friday-night-funkin
 
-# Our goals
+Play FNF on newgrounds here: https://www.newgrounds.com/portal/view/770371
 
-This project aims to bring v0.2.8 back into Haxe as close as possible to the original.
+Support the FNF project on the itch.io page: https://ninja-muffin24.itch.io/funkin
 
-This means bugs and other issues with v0.2.8 in general are not being fixed.
+IF YOU MAKE A MOD AND DISTRIBUTE A MODIFIED / RECOMPILED VERSION, YOU MUST OPEN SOURCE YOUR MOD AS WELL
 
-Any issues regarding these types of bugs (e.g. Cutscenes not working on desktop) will receive a `wontfix` label and be immediately closed.
-
-Any errors on my part though will be fixed as soon as I notice them. If you catch something before I do, [please open an issue regarding the error](../../issues).
-
-# Important notes
-
-To not mess with any of the integrations Ninjamuffin had in place, I have decided to completely remove them from the project.
-
-What's missing? Logins, awards, and a check to see if the game is outdated or not. Other than that though, the repo should be mostly accurate to how to game is shown on the website.
-
-If demand is high enough, I may make a separate branch for you to enter in your own Newgrounds API keys and bring these features back. We'll see.
-
-# Support Friday Night Funkin'
-
-Play the Ludum Dare prototype here: https://ninja-muffin24.itch.io/friday-night-funkin
-
-Play the Newgrounds one here: https://www.newgrounds.com/portal/view/770371
-
-Support the project on the itch.io page: https://ninja-muffin24.itch.io/funkin
-
-Support the project on the Kickstarter page: https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game
-
-## Credits / shoutouts
+## FNF Credits / shoutouts
 
 - [ninjamuffin99](https://twitter.com/ninja_muffin99) - Programmer
 - [PhantomArcade3K](https://twitter.com/phantomarcade3k) and [Evilsk8r](https://twitter.com/evilsk8r) - Art
 - [Kawaisprite](https://twitter.com/kawaisprite) - Musician
-- [AngelDTF (me!)](https://github.com/AngelDTF) - Reverse engineering
+
+## FNF Preservation Credits / shoutouts
+
+- [portilizen](https://www.youtube.com/channel/UCTGdCANfqYPwPeTY4gRZoOg) - Programmer
+- [tsua](https://www.youtube.com/channel/UCclYiESiD4OO0zdyD4MaPHg) - Musician
+- [AngelDTF](https://github.com/AngelDTF) - FNF v0.2.8 Reverse engineering
 
 ## Build instructions
 
 THESE INSTRUCTIONS ARE FOR COMPILING THE GAME'S SOURCE CODE!!!
 
-IF YOU WANT TO JUST DOWNLOAD AND INSTALL AND PLAY THE GAME NORMALLY, [GO TO THE RELEASES PAGE](../../releases) AND DOWNLOAD PRECOMPILED PACKAGES FROM THERE!
+IF YOU WANT TO JUST DOWNLOAD AND INSTALL AND PLAY THE GAME NORMALLY, [GO TO THE RELEASES PAGE](https://github.com/AngelDTF/FNF-NewgroundsPort/releases) AND DOWNLOAD PRECOMPILED PACKAGES FROM THERE!
 
 IF YOU WANT TO COMPILE THE GAME YOURSELF, CONTINUE READING!!!
 
@@ -81,6 +64,7 @@ You should have everything ready for compiling the game! Follow the guide below 
 Once you have all those installed, it's pretty easy to compile the game. You just need to run 'lime test html5 -debug' in the root of the project to build and run the HTML5 version. (command prompt navigation guide can be found here: [https://ninjamuffin99.newgrounds.com/news/post/1090480](https://ninjamuffin99.newgrounds.com/news/post/1090480))
 
 To run it from your desktop (Windows, Mac, Linux) it can be a bit more involved. For Linux, you only need to open a terminal in the project directory and run 'lime test linux -debug' and then run the executable file in export/release/linux/bin. For Windows, you need to install Visual Studio Community 2019. While installing VSC, don't click on any of the options to install workloads. Instead, go to the individual components tab and choose the following:
+
 * MSVC v142 - VS 2019 C++ x64/x86 build tools
 * Windows SDK (10.0.17763.0)
 * C++ Profiling tools

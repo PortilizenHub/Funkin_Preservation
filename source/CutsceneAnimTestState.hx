@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxG;
 import animate.FlxAnimate;
 import flixel.util.FlxColor;
 import flixel.FlxState;
@@ -27,6 +28,9 @@ class CutsceneAnimTestState extends FlxState
 
 	override function update(elapsed:Float)
 	{
+		if (FlxG.keys.justReleased.ESCAPE)
+			FlxG.switchState(new MainMenuState());
+
 		super.update(elapsed);
 	}
 }
