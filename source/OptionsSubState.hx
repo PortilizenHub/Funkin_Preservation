@@ -33,6 +33,9 @@ class OptionsSubState extends MusicBeatSubstate
 			optionText.size = 64;
 			grpOptionsTexts.add(optionText);
 		}
+		
+		FlxG.state.closeSubState();
+		FlxG.state.openSubState(new option_menus.GameplaySubState());
 	}
 
 	override function update(elapsed:Float)

@@ -63,6 +63,11 @@ class TemplateSubState extends MusicBeatSubstate
 		grpOptionsTexts.forEach(function(txt:FlxText)
 		{
             txt.text = textMenuItems[txt.ID] + ": " + textItemsBool[txt.ID];
+			
+			if (textItemsBool[txt.ID] != null)
+					trace('');
+			else if (textItemsBool[txt.ID] == null)
+					FlxG.log.error('item is null and does not have a value');
 
             txt.color = FlxColor.WHITE;
 

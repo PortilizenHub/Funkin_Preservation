@@ -40,7 +40,7 @@ class StreamerSubState extends MusicBeatSubstate
 	{
 		super.update(elapsed);
 
-        textItemsBool = [];
+        textItemsBool = [Streaming.a_rated];
 
 		if (controls.UP_P)
 			curSelected -= 1;
@@ -62,17 +62,12 @@ class StreamerSubState extends MusicBeatSubstate
 
 		grpOptionsTexts.forEach(function(txt:FlxText)
 		{
-			var text:String = 'coolswag';
-
-			var enabledThing:Bool;
-			enabledThing = textItemsBool[txt.ID];
-
-			if (enabledThing)
-				text = 'enabled';
-			else if (!enabledThing)
-				text = 'disabled';
-
-            txt.text = textMenuItems[txt.ID] + ": " + text;
+			txt.text = textMenuItems[txt.ID] + ": " + textItemsBool[txt.ID];
+			
+			if (textItemsBool[txt.ID] != null)
+					trace('');
+			else if (textItemsBool[txt.ID] == null)
+					FlxG.log.error('item is null and does not have a value');
 
             txt.color = FlxColor.WHITE;
 
@@ -83,7 +78,12 @@ class StreamerSubState extends MusicBeatSubstate
 		if (controls.ACCEPT)
 		{
 			switch (textMenuItems[curSelected])
-			{           
+			{   
+				case "A-rated":
+					if (Streaming.a_rated == true)
+						Streaming.a_rated = false;
+					else if (Streaming.a_rated == false)        
+						Streaming.a_rated = true;
 			}
 		}
 	}
