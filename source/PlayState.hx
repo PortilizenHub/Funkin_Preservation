@@ -140,7 +140,7 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-		version = new FlxText(1080, 700, 'v' + Application.current.meta.get('version'), 12);
+		version = new FlxText(10, 20, 'v' + Application.current.meta.get('version'), 12);
 		add(version);
 
 		if (FlxG.sound.music != null)
