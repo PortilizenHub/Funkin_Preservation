@@ -1,6 +1,6 @@
 package option_menus;
 
-import Options.Gameplay;
+import Options.Streaming;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -9,8 +9,8 @@ import flixel.util.FlxColor;
 
 class StreamerSubState extends MusicBeatSubstate
 {
-	var textMenuItems:Array<String> = ['Text'];
-	var textItemsBool:Array<Bool> = [];
+	var textMenuItems:Array<String> = ['A-rated'];
+	var textItemsBool:Array<Bool> = [Streaming.a_rated];
 
 	var selector:FlxSprite;
 	var curSelected:Int = 0;

@@ -70,8 +70,10 @@ class FreeplayState extends MusicBeatState
 		if (StoryMenuState.weekUnlocked[3] || isDebug)
 			addWeek(['Pico', 'Philly-Nice', 'Blammed'], 3, ['pico']);
 
-		if (StoryMenuState.weekUnlocked[4] || isDebug)
+		if (StoryMenuState.weekUnlocked[4] || isDebug && Options.Streaming.a_rated)
 			addWeek(['Satin-Panties', 'High', 'Milf'], 4, ['mom']);
+		else if (StoryMenuState.weekUnlocked[4] || isDebug && !Options.Streaming.a_rated)
+			addWeek(['Fly-My', 'High', 'Mother'], 4, ['mom']);
 
 		if (StoryMenuState.weekUnlocked[5] || isDebug)
 			addWeek(['Cocoa', 'Eggnog', 'Winter-Horrorland'], 5, ['parents-christmas', 'parents-christmas', 'monster-christmas']);
