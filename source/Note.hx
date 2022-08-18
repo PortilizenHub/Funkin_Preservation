@@ -44,7 +44,12 @@ class Note extends FlxSprite
 
 		x += 50;
 		// MAKE SURE ITS DEFINITELY OFF SCREEN?
-		y -= 2000;
+		
+		if(!Options.Gameplay.downscroll)
+			y -= 2000;
+		else if (Options.Gameplay.downscroll)
+			y += 2000;
+
 		this.strumTime = strumTime;
 
 		this.noteData = noteData;
