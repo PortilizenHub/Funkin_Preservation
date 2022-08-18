@@ -51,7 +51,9 @@ class OptionsMenu extends MusicBeatState
 
 		super.create();
 
-		openSubState(new OptionsSubState());
+
+		FlxG.state.openSubState(new option_menus.GameplaySubState());
+		//openSubState(new OptionsSubState());
 	}
 
 	override function update(elapsed:Float)
