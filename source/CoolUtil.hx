@@ -36,17 +36,13 @@ class CoolUtil
 		return dumbArray;
 	}
 
-	inline public static function boundTo(value:Float, min:Float, max:Float):Float
+	public static function camLerpShit(ratio:Float)
 	{
-		return Math.max(min, Math.min(max, value));
+		return FlxG.elapsed / (1 / 60) * ratio;
 	}
 
-	inline public static function URL(url:String)
+	public static function coolLerp(a:Float, b:Float, ratio:Float)
 	{
-		#if linux
-		Sys.command('/usr/bin/xdg-open', [url, "&"]);
-		#else
-		FlxG.openURL(url);
-		#end
+		return a + camLerpShit(ratio) * (b - a);
 	}
 }

@@ -1,5 +1,11 @@
 package;
 
+import openfl.display.Sprite;
+import openfl.net.NetStream;
+import openfl.media.Video;
+import ui.PreferencesMenu;
+import shaderslmfao.BuildingShaders;
+import shaderslmfao.ColorSwap;
 #if desktop
 import Discord.DiscordClient;
 import sys.thread.Thread;
@@ -24,15 +30,15 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import io.newgrounds.NG;
 import lime.app.Application;
 import openfl.Assets;
+import openfl.Lib;
 
 using StringTools;
 
 class TitleState extends MusicBeatState
 {
-	static var initialized:Bool = false;
+	public static var initialized:Bool = false;
 
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
@@ -43,36 +49,39 @@ class TitleState extends MusicBeatState
 	var curWacky:Array<String> = [];
 
 	var wackyImage:FlxSprite;
+	
+	var lastBeat:Int = 0;
+
+	var swagShader:ColorSwap;
+	var alphaShader:BuildingShaders;
+
+	#if web
+	var video:Video;
+	var netStream:NetStream;
+	var overlay:Sprite;
+	#end
 
 	override public function create():Void
 	{
-		#if html5
-		#if debug
-		FlxG.log.redirectTraces = true;
-		#end
-		#end
-
 		#if polymod
-		polymod.Polymod.init({modRoot: "mods", dirs: ['introMod']});
+		polymod.Polymod.init({modRoot: "mods", dirs: ['introMod'], framework: OPENFL});
 		#end
 
-		PlayerSettings.init();
+		FlxG.game.focusLostFramerate = 60;
+
+		swagShader = new ColorSwap();
+		alphaShader = new BuildingShaders();
+
+		FlxG.sound.muteKeys = [ZERO];
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
-		// DEBUG BULLSHIT
-
 		super.create();
-
-		NGio.noLogin(APIStuff.API);
-
-		#if ng
-		var ng:NGio = new NGio(APIStuff.API, APIStuff.EncKey);
-		trace('NEWGROUNDS LOL');
-		#end
 
 		FlxG.save.bind('funkin', 'ninjamuffin99');
 
+		PreferencesMenu.initPrefs();
+		PlayerSettings.init();
 		Highscore.load();
 
 		if (FlxG.save.data.weekUnlocked != null)
@@ -87,6 +96,11 @@ class TitleState extends MusicBeatState
 			// QUICK PATCH OOPS!
 			if (!StoryMenuState.weekUnlocked[0])
 				StoryMenuState.weekUnlocked[0] = true;
+		}
+
+		if (FlxG.save.data.seenVideo != null)
+		{
+			VideoState.seenVideo = FlxG.save.data.seenVideo;
 		}
 
 		#if FREEPLAY
@@ -108,6 +122,36 @@ class TitleState extends MusicBeatState
 		 });
 		#end
 	}
+
+	#if web
+	function client_onMetaData(e)
+	{
+		video.attachNetStream(netStream);
+		video.width = video.videoWidth;
+		video.height = video.videoHeight;
+	}
+
+	function netStream_onAsyncError(e)
+	{
+		trace("Error loading video");
+	}
+
+	function netConnection_onNetStatus(e)
+	{
+		if (e.info.code == 'NetStream.Play.Complete')
+		{
+			startIntro();
+		}
+		trace(e.toString());
+	}
+
+	function overlay_onMouseDown(e)
+	{
+		netStream.soundTransform.volume = 0.2;
+		netStream.soundTransform.pan = -1;
+		Lib.current.stage.removeChild(overlay);
+	}
+	#end
 
 	var logoBl:FlxSprite;
 	var gfDance:FlxSprite;
@@ -160,6 +204,7 @@ class TitleState extends MusicBeatState
 		logoBl.updateHitbox();
 		// logoBl.screenCenter();
 		// logoBl.color = FlxColor.BLACK;
+		logoBl.shader = swagShader.shader;
 
 		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
 		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
@@ -167,6 +212,7 @@ class TitleState extends MusicBeatState
 		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 		gfDance.antialiasing = true;
 		add(gfDance);
+		gfDance.shader = swagShader.shader;
 		add(logoBl);
 
 		titleText = new FlxSprite(100, FlxG.height * 0.8);
@@ -194,7 +240,7 @@ class TitleState extends MusicBeatState
 		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		credGroup.add(blackScreen);
 
-		credTextShit = new Alphabet(0, 0, "portilizen\ntsua", true);
+		credTextShit = new Alphabet(0, 0, "ninjamuffin99\nPhantomArcade\nkawaisprite\nevilsk8er", true);
 		credTextShit.screenCenter();
 
 		// credTextShit.alignment = CENTER;
@@ -219,6 +265,14 @@ class TitleState extends MusicBeatState
 			initialized = true;
 
 		// credGroup.add(credTextShit);
+
+		if (FlxG.sound.music != null)
+		{
+			FlxG.sound.music.onComplete = function()
+			{
+				FlxG.switchState(new VideoState());
+			}
+		}
 	}
 
 	function getIntroTextShit():Array<Array<String>>
@@ -238,8 +292,15 @@ class TitleState extends MusicBeatState
 
 	var transitioning:Bool = false;
 
+	var isRainbow:Bool = false;
+
 	override function update(elapsed:Float)
 	{
+		if (FlxG.keys.justPressed.EIGHT)
+		{
+			FlxG.switchState(new CutsceneAnimTestState());
+		}
+
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 		// FlxG.watch.addQuick('amp', FlxG.sound.music.amplitude);
@@ -250,6 +311,11 @@ class TitleState extends MusicBeatState
 		}
 
 		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER;
+
+		if (FlxG.keys.justPressed.FIVE)
+		{
+			FlxG.switchState(new CutsceneAnimTestState());
+		}
 
 		#if mobile
 		for (touch in FlxG.touches.list)
@@ -276,14 +342,17 @@ class TitleState extends MusicBeatState
 
 		if (pressedEnter && !transitioning && skippedIntro)
 		{
+			if (FlxG.sound.music != null)
+			{
+				FlxG.sound.music.onComplete = null;
+			}
+
 			#if !switch
 			// If it's Friday according to da clock
 			if (Date.now().getDay() == 5)
-				{
-					NGio.unlockMedal(70338);
-					if (NGio.medalUnlocked)
-						FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
-				}
+			{
+				// Unlock Friday medal
+			}
 			#end
 
 			titleText.animation.play('press');
@@ -294,16 +363,28 @@ class TitleState extends MusicBeatState
 			transitioning = true;
 			// FlxG.sound.music.stop();
 
-			new FlxTimer().start(2, function(tmr:FlxTimer)
+			// Check if version is outdated
+			if (!OutdatedSubState.leftState)
 			{
+				// TODO: Make a check here or delete this since no NGAPI
 				FlxG.switchState(new MainMenuState());
-			});
+			}
+
 			// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
 		}
 
-		if (pressedEnter && !skippedIntro)
+		if (pressedEnter && !skippedIntro && initialized)
 		{
 			skipIntro();
+		}
+
+		if (controls.UI_LEFT)
+		{
+			swagShader.update(elapsed * 0.1);
+		}
+		if (controls.UI_RIGHT)
+		{
+			swagShader.update(-elapsed * 0.1);
 		}
 
 		super.update(elapsed);
@@ -353,56 +434,64 @@ class TitleState extends MusicBeatState
 
 		FlxG.log.add(curBeat);
 
-		switch (curBeat)
+		if (curBeat > lastBeat)
 		{
-			case 1:
-				createCoolText(['portilizen', 'tsua']);
-			// credTextShit.visible = true;
-			case 3:
-				addMoreText('present');
-			// credTextShit.text += '\npresent...';
-			// credTextShit.addText();
-			case 4:
-				deleteCoolText();
-			// credTextShit.visible = false;
-			// credTextShit.text = 'In association \nwith';
-			// credTextShit.screenCenter();
-			case 5:
-				createCoolText(['In association', 'with']);
-			case 7:
-				addMoreText('newgrounds');
-				ngSpr.visible = true;
-			// credTextShit.text += '\nNewgrounds';
-			case 8:
-				deleteCoolText();
-				ngSpr.visible = false;
-			// credTextShit.visible = false;
-
-			// credTextShit.text = 'Shoutouts Tom Fulp';
-			// credTextShit.screenCenter();
-			case 9:
-				createCoolText([curWacky[0]]);
-			// credTextShit.visible = true;
-			case 11:
-				addMoreText(curWacky[1]);
-			// credTextShit.text += '\nlmao';
-			case 12:
-				deleteCoolText();
-			// credTextShit.visible = false;
-			// credTextShit.text = "Friday";
-			// credTextShit.screenCenter();
-			case 13:
-				addMoreText('Friday');
-			// credTextShit.visible = true;
-			case 14:
-				addMoreText('Night');
-			// credTextShit.text += '\nNight';
-			case 15:
-				addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
-
-			case 16:
-				skipIntro();
+			for (i in lastBeat...curBeat)
+			{
+				switch (i + 1)
+				{
+					case 1:
+						createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
+					// credTextShit.visible = true;
+					case 3:
+						addMoreText('present');
+					// credTextShit.text += '\npresent...';
+					// credTextShit.addText();
+					case 4:
+						deleteCoolText();
+					// credTextShit.visible = false;
+					// credTextShit.text = 'In association \nwith';
+					// credTextShit.screenCenter();
+					case 5:
+						createCoolText(['In association', 'with']);
+					case 7:
+						addMoreText('newgrounds');
+						ngSpr.visible = true;
+					// credTextShit.text += '\nNewgrounds';
+					case 8:
+						deleteCoolText();
+						ngSpr.visible = false;
+					// credTextShit.visible = false;
+		
+					// credTextShit.text = 'Shoutouts Tom Fulp';
+					// credTextShit.screenCenter();
+					case 9:
+						createCoolText([curWacky[0]]);
+					// credTextShit.visible = true;
+					case 11:
+						addMoreText(curWacky[1]);
+					// credTextShit.text += '\nlmao';
+					case 12:
+						deleteCoolText();
+					// credTextShit.visible = false;
+					// credTextShit.text = "Friday";
+					// credTextShit.screenCenter();
+					case 13:
+						addMoreText('Friday');
+					// credTextShit.visible = true;
+					case 14:
+						addMoreText('Night');
+					// credTextShit.text += '\nNight';
+					case 15:
+						addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
+		
+					case 16:
+						skipIntro();
+				}
+			}
 		}
+		
+		lastBeat = curBeat;
 	}
 
 	var skippedIntro:Bool = false;

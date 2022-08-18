@@ -8,7 +8,7 @@ import flixel.util.FlxColor;
 
 class OptionsSubState extends MusicBeatSubstate
 {
-	var textMenuItems:Array<String> = ['Gameplay', 'Streaming'];
+	var textMenuItems:Array<String> = ['Master Volume', 'Sound Volume', 'Controls'];
 
 	var selector:FlxSprite;
 	var curSelected:Int = 0;
@@ -23,19 +23,14 @@ class OptionsSubState extends MusicBeatSubstate
 		add(grpOptionsTexts);
 
 		selector = new FlxSprite().makeGraphic(5, 5, FlxColor.RED);
-		// add(selector);
+		add(selector);
 
 		for (i in 0...textMenuItems.length)
 		{
-			var optionText:FlxText = new FlxText(20, 20 + (i * 80), 0, textMenuItems[i], 32);
-			optionText.font = Paths.font('funker.otf');
+			var optionText:FlxText = new FlxText(20, 20 + (i * 50), 0, textMenuItems[i], 32);
 			optionText.ID = i;
-			optionText.size = 64;
 			grpOptionsTexts.add(optionText);
 		}
-		
-		FlxG.state.closeSubState();
-		FlxG.state.openSubState(new option_menus.GameplaySubState());
 	}
 
 	override function update(elapsed:Float)
@@ -47,13 +42,6 @@ class OptionsSubState extends MusicBeatSubstate
 
 		if (controls.DOWN_P)
 			curSelected += 1;
-
-		if (controls.BACK)
-			{
-				FlxG.state.closeSubState();
-				FlxG.switchState(new MainMenuState());
-			}
-
 
 		if (curSelected < 0)
 			curSelected = textMenuItems.length - 1;
@@ -73,17 +61,9 @@ class OptionsSubState extends MusicBeatSubstate
 		{
 			switch (textMenuItems[curSelected])
 			{
-				case "Gameplay":
+				case "Controls":
 					FlxG.state.closeSubState();
-					FlxG.state.openSubState(new option_menus.GameplaySubState());
-
-				case "Streaming":
-					FlxG.state.closeSubState();
-					FlxG.state.openSubState(new option_menus.StreamerSubState());
-
-				default:
-					FlxG.state.closeSubState();
-					FlxG.state.openSubState(new option_menus.TemplateSubState());
+					FlxG.state.openSubState(new ControlsSubState());
 			}
 		}
 	}
