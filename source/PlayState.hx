@@ -736,7 +736,7 @@ class PlayState extends MusicBeatState
 		strumLine.scrollFactor.set();
 
 		if(Options.Gameplay.downscroll)
-			strumLine.y += 1000;
+			strumLine.y = FlxG.height - 150;
 
 		strumLineNotes = new FlxTypedGroup<FlxSprite>();
 		add(strumLineNotes);
@@ -773,6 +773,8 @@ class PlayState extends MusicBeatState
 		healthBarBG = new FlxSprite(0, FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
+		if (Options.Gameplay.downscroll)
+			healthBarBG.y = 0.11 * FlxG.height;
 		add(healthBarBG);
 
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
