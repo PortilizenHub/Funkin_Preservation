@@ -41,11 +41,7 @@ class MainMenuState extends MusicBeatState
 		{
 			trace('you know the rules and so do i');
 
-			#if linux
-			Sys.command('/usr/bin/xdg-open', ["https://www.youtube.com/watch?v=dQw4w9WgXcQ", "&"]);
-			#else
-			FlxG.openURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-			#end
+			CoolUtil.URL('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
 		}
 
 		transIn = FlxTransitionableState.defaultTransIn;
@@ -102,7 +98,7 @@ class MainMenuState extends MusicBeatState
 		}
 
 		FlxG.camera.follow(camFollow, null, 0.06);
-		
+
 		// var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "FNF Preservation v" + CoolUtil.coolTextFile('version.txt'), 12);
 		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "FNF Preservation v" + Application.current.meta.get('version'), 12);
 		versionShit.scrollFactor.set();
@@ -131,11 +127,7 @@ class MainMenuState extends MusicBeatState
 			{
 				trace('you know the rules and so do i');
 
-				#if linux
-				Sys.command('/usr/bin/xdg-open', ["https://www.youtube.com/watch?v=dQw4w9WgXcQ", "&"]);
-				#else
-				FlxG.openURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-				#end
+				CoolUtil.URL('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
 			}
 			
 			if (controls.UP_P)
@@ -159,11 +151,7 @@ class MainMenuState extends MusicBeatState
 			{
 				if (optionShit[curSelected] == 'donate')
 				{
-					#if linux
-					Sys.command('/usr/bin/xdg-open', ["https://ninja-muffin24.itch.io/funkin", "&"]);
-					#else
-					FlxG.openURL('https://ninja-muffin24.itch.io/funkin');
-					#end
+					CoolUtil.URL('https://ninja-muffin24.itch.io/funkin');
 				}
 				else
 				{
