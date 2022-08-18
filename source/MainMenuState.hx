@@ -32,6 +32,7 @@ class MainMenuState extends MusicBeatState
 
 	override function create()
 	{
+
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
@@ -106,6 +107,9 @@ class MainMenuState extends MusicBeatState
 		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "FNF Preservation v" + CoolUtil.coolTextFile('version.txt'), 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.text.split('[');
+		versionShit.text.split(']');
+		trace(versionShit.text);
 		add(versionShit);
 
 		NGio.logEvent('cool yo');
