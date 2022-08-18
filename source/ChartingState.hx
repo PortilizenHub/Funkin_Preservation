@@ -204,6 +204,11 @@ class ChartingState extends MusicBeatState
 			saveLevel();
 		});
 
+		var clearChert:FlxButton = new FlxButton(saveButton.x, saveButton.y + 30, "Restart Chart", function()
+		{
+			clearSong();
+		});
+
 		var reloadSong:FlxButton = new FlxButton(saveButton.x + saveButton.width + 10, saveButton.y, "Reload Audio", function()
 		{
 			loadSong(_song.song);
@@ -255,6 +260,7 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(stepperSpeed);
 		tab_group_song.add(player1DropDown);
 		tab_group_song.add(player2DropDown);
+		tab_group_song.add(clearChert);
 
 		UI_box.addGroup(tab_group_song);
 		UI_box.scrollFactor.set();
