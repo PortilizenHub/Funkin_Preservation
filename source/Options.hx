@@ -7,6 +7,7 @@ class Gameplay
 	public static var midSongEvents:Bool = true;
 	public static var cutscenes:Bool = true;
 	public static var keybinds:Bool = false;
+	public static var downscroll:Bool = false;
 }
 
 class Streaming

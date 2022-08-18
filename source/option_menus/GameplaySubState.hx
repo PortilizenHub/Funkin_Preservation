@@ -9,8 +9,8 @@ import flixel.util.FlxColor;
 
 class GameplaySubState extends MusicBeatSubstate
 {
-	var textMenuItems:Array<String> = ['Mid Song Events', 'Cutscenes'];
-	var textItemsBool:Array<Bool> = [Gameplay.midSongEvents, Gameplay.cutscenes];
+	var textMenuItems:Array<String> = ['Mid Song Events', 'Cutscenes', 'Downscroll'];
+	var textItemsBool:Array<Bool> = [Gameplay.midSongEvents, Gameplay.cutscenes, Gameplay.downscroll];
 
 	var selector:FlxSprite;
 	var curSelected:Int = 0;
@@ -40,7 +40,7 @@ class GameplaySubState extends MusicBeatSubstate
 	{
 		super.update(elapsed);
 
-        textItemsBool = [Gameplay.midSongEvents, Gameplay.cutscenes];
+		textItemsBool = [Gameplay.midSongEvents, Gameplay.cutscenes, Gameplay.downscroll];
 
 		if (controls.UP_P)
 			curSelected -= 1;
@@ -48,11 +48,11 @@ class GameplaySubState extends MusicBeatSubstate
 		if (controls.DOWN_P)
 			curSelected += 1;
 
-        if (controls.BACK)
-			{
-				FlxG.state.closeSubState();
-				FlxG.switchState(new MainMenuState());
-			}
+		if (controls.BACK)
+		{
+			FlxG.state.closeSubState();
+			FlxG.switchState(new MainMenuState());
+		}
 
 		if (curSelected < 0)
 			curSelected = textMenuItems.length - 1;
@@ -62,14 +62,9 @@ class GameplaySubState extends MusicBeatSubstate
 
 		grpOptionsTexts.forEach(function(txt:FlxText)
 		{
-            txt.text = textMenuItems[txt.ID] + ": " + textItemsBool[txt.ID];
-			
-			if (textItemsBool[txt.ID] != null)
-					trace('');
-			else if (textItemsBool[txt.ID] == null)
-					FlxG.log.error('item is null and does not have a value');
+			txt.text = textMenuItems[txt.ID] + ": " + textItemsBool[txt.ID];
 
-            txt.color = FlxColor.WHITE;
+			txt.color = FlxColor.WHITE;
 
 			if (txt.ID == curSelected)
 				txt.color = FlxColor.YELLOW;
@@ -80,30 +75,38 @@ class GameplaySubState extends MusicBeatSubstate
 			switch (textMenuItems[curSelected])
 			{
 				case "Mid Song Events":
-                    if (Gameplay.midSongEvents == true)
-                        Gameplay.midSongEvents = false;
-                    else if (Gameplay.midSongEvents == false)
-                        Gameplay.midSongEvents = true;
+					if (Gameplay.midSongEvents == true)
+						Gameplay.midSongEvents = false;
+					else if (Gameplay.midSongEvents == false)
+						Gameplay.midSongEvents = true;
 
-                case "Cutscenes":
-                    if (Gameplay.cutscenes == true)
-                        Gameplay.cutscenes = false;
-                    else if (Gameplay.cutscenes == false)
-                        Gameplay.cutscenes = true;
+				case "Cutscenes":
+					if (Gameplay.cutscenes == true)
+						Gameplay.cutscenes = false;
+					else if (Gameplay.cutscenes == false)
+						Gameplay.cutscenes = true;
 
-                case "keybinds":
-                    if (Gameplay.keybinds == true)
-                        {
-                            controls.setKeyboardScheme(None, 'dfjk', false);
-                            Gameplay.keybinds = false;
-                        }
-                    else if (Gameplay.keybinds == false)
-                        {
-                            controls.setKeyboardScheme(None, 'wasd', false);
-                            Gameplay.keybinds = true;
-                        }
-                    trace('keybinds');
-                        
+				case "Downscroll":
+					if (Gameplay.downscroll == true)
+						Gameplay.downscroll = false;
+					else if (Gameplay.downscroll == false)
+						Gameplay.downscroll = true;
+
+				case "keybinds":
+					if (Gameplay.keybinds == true)
+					{
+						controls.setKeyboardScheme(None, 'dfjk', false);
+						Gameplay.keybinds = false;
+					}
+					else if (Gameplay.keybinds == false)
+					{
+						controls.setKeyboardScheme(None, 'wasd', false);
+						Gameplay.keybinds = true;
+					}
+					trace('keybinds');
+
+				default:
+					FlxG.log.error('item is null and does not have a value');
 			}
 		}
 	}
