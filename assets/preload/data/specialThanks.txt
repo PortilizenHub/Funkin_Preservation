@@ -1,2 +1,2 @@
-ShadowMario - downscroll code and other stuff i forgot
+ShadowMario - original downscroll code and other stuff i forgot
 AngelIDTF - FNF v0.2.8 reverse enginnering (check them out, they cool)
