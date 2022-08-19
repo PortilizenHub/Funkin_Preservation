@@ -77,7 +77,7 @@ class PauseSubState extends MusicBeatSubstate
 		add(practiceText);
 
 		TIME = new FlxText(20, 15 + 128, 0, "TIME: ", 32);
-		TIME.text = "Time: " + Std.string(FlxMath.roundDecimal(Conductor.songPosition / 1000, 2));
+		TIME.text = "Time Elapsed: " + Std.string(FlxMath.roundDecimal(Conductor.songPosition / 1000, 2));
 		TIME.scrollFactor.set();
 		TIME.setFormat(Paths.font('vcr.ttf'), 32);
 		TIME.updateHitbox();
