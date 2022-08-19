@@ -43,6 +43,8 @@
 	<assets path="assets" exclude="*.ogg" if="web" />
 	<assets path="assets" exclude="*.mp3|*.mp4" unless="web" />
 
+	<assets path="assets/exclude" rename="" />
+
 	<library name="songs" preload="false" />
 	<library name="tutorial" preload="false" />
 	<library name="week1" preload="false" />
