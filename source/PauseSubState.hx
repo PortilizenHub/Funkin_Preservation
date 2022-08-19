@@ -1,5 +1,6 @@
 package;
 
+import Conductor.BPMChangeEvent;
 import Controls.Control;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -12,6 +13,7 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+import flixel.math.FlxMath;
 
 class PauseSubState extends MusicBeatSubstate
 {
@@ -26,6 +28,7 @@ class PauseSubState extends MusicBeatSubstate
 	var pauseMusic:FlxSound;
 
 	var practiceText:FlxText;
+	var TIME:FlxText;
 
 	public function new(x:Float, y:Float)
 	{
@@ -73,10 +76,21 @@ class PauseSubState extends MusicBeatSubstate
 		practiceText.visible = PlayState.practiceMode;
 		add(practiceText);
 
+		TIME = new FlxText(20, 15 + 128, 0, "TIME: ", 32);
+		TIME.text = "Time: " + Std.string(FlxMath.roundDecimal(Conductor.songPosition / 1000, 2));
+		TIME.scrollFactor.set();
+		TIME.setFormat(Paths.font('vcr.ttf'), 32);
+		TIME.updateHitbox();
+		TIME.x = FlxG.width - (TIME.width + 20);
+		if (!PlayState.practiceMode)
+			TIME.y = 15 + 96;
+		add(TIME);
+
 		levelDifficulty.alpha = 0;
 		levelInfo.alpha = 0;
 		deathCounter.alpha = 0;
 		practiceText.alpha = 0;
+		TIME.alpha = 0;
 
 		levelInfo.x = FlxG.width - (levelInfo.width + 20);
 		levelDifficulty.x = FlxG.width - (levelDifficulty.width + 20);
@@ -87,6 +101,7 @@ class PauseSubState extends MusicBeatSubstate
 		FlxTween.tween(levelDifficulty, {alpha: 1, y: levelDifficulty.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.5});
 		FlxTween.tween(deathCounter, {alpha: 1, y: deathCounter.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.7});
 		FlxTween.tween(practiceText, {alpha: 1, y: practiceText.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.9});
+		FlxTween.tween(TIME, {alpha: 1, y: TIME.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.9});
 
 		grpMenuShit = new FlxTypedGroup<Alphabet>();
 		add(grpMenuShit);
@@ -116,6 +131,8 @@ class PauseSubState extends MusicBeatSubstate
 
 	override function update(elapsed:Float)
 	{
+		TIME.text = "Time: " + Std.string(FlxMath.roundDecimal(Conductor.songPosition / 1000, 2));
+
 		if (pauseMusic.volume < 0.5)
 			pauseMusic.volume += 0.01 * elapsed;
 
