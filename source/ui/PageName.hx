@@ -2,6 +2,9 @@ package ui;
 
 enum PageName
 {
-	Preferences;
+	Options;
 	Controls;
+	Colors;
+	Mods;
+	Preferences;
 }
