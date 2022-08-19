@@ -910,7 +910,7 @@ class PlayState extends MusicBeatState
 		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
 
-		if (isStoryMode && !seenCutscene)
+		if (isStoryMode && !seenCutscene && PreferencesMenu.getPref('cutscenes') == true)
 		{
 			seenCutscene = true;
 			switch (curSong.toLowerCase())
@@ -2408,18 +2408,21 @@ class PlayState extends MusicBeatState
 			{
 				boyfriend.stunned = false;
 			});
-
-			switch (direction)
-			{
-				case 0:
-					boyfriend.playAnim('singLEFTmiss', true);
-				case 1:
-					boyfriend.playAnim('singDOWNmiss', true);
-				case 2:
-					boyfriend.playAnim('singUPmiss', true);
-				case 3:
-					boyfriend.playAnim('singRIGHTmiss', true);
-			}
+			
+			if (PreferencesMenu.getPref('botplay') == false)
+				{
+					switch (direction)
+					{
+						case 0:
+							boyfriend.playAnim('singLEFTmiss', true);
+						case 1:
+							boyfriend.playAnim('singDOWNmiss', true);
+						case 2:
+							boyfriend.playAnim('singUPmiss', true);
+						case 3:
+							boyfriend.playAnim('singRIGHTmiss', true);
+					}
+				}
 		}
 	}
 
