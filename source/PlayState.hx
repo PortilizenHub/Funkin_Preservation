@@ -912,7 +912,7 @@ class PlayState extends MusicBeatState
 		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
 
-		if (isStoryMode && !seenCutscene && PreferencesMenu.getPref('cutscenes') == true)
+		if (isStoryMode && !seenCutscene)
 		{
 			seenCutscene = true;
 			switch (curSong.toLowerCase())
@@ -952,12 +952,14 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
 				case 'thorns':
 					schoolIntro(doof);
+				#if web
 				case 'ugh':
 					ughIntro();
 				case 'guns':
 					gunsIntro();
 				case 'stress':
 					stressIntro();
+				#end
 				default:
 					startCountdown();
 			}
