@@ -9,7 +9,12 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Added
 - Working Offset Editor (with a new offset system probably)
 
-# [0.2.2] - 2022-17-09
+# [0.2.2.1] - 2022-08-18
+### Fixed
+- Tankman
+- Changelogs (im stupid)
+
+# [0.2.2] - 2022-08-18
 ### Added
 - TANKMAN! 3 NEW SONGS BY KAWAISPRITE (UGH, GUNS, STRESS)! Charting help by MtH!
 - Monster added into week 2, FINALLY (Charting help by MtH and ChaoticGamer!)
@@ -27,7 +32,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Philly-nice (its Philly now)
 - Dad-Battle (its Dadbattle now)
 
-# [0.2.1] - 2022-17-09
+# [0.2.1] - 2022-08-18
 ### Added
 - Options menu
 
@@ -45,7 +50,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - [Monster](https://tenor.com/view/superbad-mc-lovin-cry-fogell-why-dont-you-cry-about-it-gif-15695318)
 - Hold notes having less health gain
 
-# [0.2.0] - 2022-17-08
+# [0.2.0] - 2022-08-17
 ### Added
 - Miss counter
 - Secret in main menu (press R)
@@ -60,6 +65,6 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - [Monster](https://tenor.com/view/superbad-mc-lovin-cry-fogell-why-dont-you-cry-about-it-gif-15695318)
 - Hold notes having less health gain
 
-# [0.1.0] - 2022-17-08
+# [0.1.0] - 2022-08-17
 ### Added
 - Uh, everything. This the mods's initial release. We put it out
