@@ -11,11 +11,9 @@ class VideoState extends MusicBeatState
 {
 	public static var seenVideo:Bool = false;
 
-	#if web
 	private var video:Video;
 	private var netStream:NetStream;
 	private var overlay:Sprite;
-	#end
 
 	override function create()
 	{
@@ -30,7 +28,6 @@ class VideoState extends MusicBeatState
 			FlxG.sound.music.stop();
 		}
 
-		#if web
 		video = new Video();
 		FlxG.addChildBelowMouse(video);
 
@@ -47,9 +44,8 @@ class VideoState extends MusicBeatState
 		overlay.graphics.drawRect(0, 0, 1280, 720);
 		overlay.addEventListener('mouseDown', overlay_onMouseDown);
 		overlay.buttonMode = true;
-		#else
-		finishVid(); // fallback for other targets
-		#end
+
+		finishVid();
 	}
 
 	override function update(elapsed:Float)
@@ -62,17 +58,14 @@ class VideoState extends MusicBeatState
 
 	private function finishVid()
 	{
-		#if web
 		netStream.dispose();
 		if (FlxG.game.contains(video))
 			FlxG.game.removeChild(video);
-		#end
 
 		TitleState.initialized = false;
 		FlxG.switchState(new TitleState());
 	}
 
-	#if web
 	private function client_onMetaData(e)
 	{
 		video.attachNetStream(netStream);
@@ -100,5 +93,4 @@ class VideoState extends MusicBeatState
 		netStream.soundTransform.pan = -1;
 		Lib.current.stage.removeChild(overlay);
 	}
-	#end
 }
