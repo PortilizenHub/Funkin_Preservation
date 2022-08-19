@@ -9,6 +9,20 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Added
 - Working Offset Editor (with a new offset system probably)
 
+# [0.2.3] - 2022-08-19
+### Added
+- Option to disable Cutscenes
+- Fade anim to practice mode text
+- Game over when you press R even if using practice mode
+- Time Elapsed text in pause menu (dont ask me to put it in gameplay, it technically alr is)
+
+### Fixed
+- Tankman (for real this time, i had tested it)
+- Combo Breaks
+
+### Removed
+- if web checks
+
 # [0.2.2.1] - 2022-08-18
 ### Fixed
 - Tankman
